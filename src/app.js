@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import User from './User/User';
 import '../styles/site';
 
 class App extends React.Component {
@@ -8,7 +9,7 @@ class App extends React.Component {
     }
     render() {
         return (
-            <div>I am the Ass</div>
+            <User />
         );
     }
 }
