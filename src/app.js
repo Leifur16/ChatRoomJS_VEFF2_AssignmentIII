@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import User from './User/User';
+import Chat from './Chat/Chat'
 import '../styles/site';
 
 class App extends React.Component {
@@ -9,7 +10,10 @@ class App extends React.Component {
     }
     render() {
         return (
+          <div>
             <User />
+            <Chat />
+          </div>
         );
     }
 }

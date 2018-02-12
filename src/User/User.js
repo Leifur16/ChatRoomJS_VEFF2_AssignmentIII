@@ -7,16 +7,15 @@ class User extends React.Component {
     }
     render() {
         return (
-            <div>Username<input type="text" name="uname"/></div>
+          <div>Username<input type="text" name="uname"/></div>
         );
     }
-	/*Array.prototype.inArray = function(comparer) { 
-    for(var i=0; i < this.length; i++) { 
-        if(comparer(this[i])) return true; 
+	/*Array.prototype.inArray = function(comparer) {
+    for(var i=0; i < this.length; i++) {
+        if(comparer(this[i])) return true;
     }
-    return false; 
-	};*/ 
+    return false;
+	};*/
 }
 
 export default User;
-
