@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import User from './User/User';
+import User from './Container/User/User';
+import NavBar from './Navigation/NavBar';
 import '../styles/site';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
     }
-	
+
     render() {
         return (
-            <User />
+            <div>
+                <NavBar />
+                <User />
+            </div>
         );
     }
 }
