@@ -25,7 +25,7 @@ class App extends React.Component {
                 <NavBar />
                 <User />
                 <div className="container">
-                  <ChatWindow />
+                    <ChatWindow />
                 </div>
             </div>
         );
