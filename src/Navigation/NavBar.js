@@ -1,14 +1,15 @@
 import React from 'react';
 
-class Chat extends React.Component {
+class NavBar extends React.Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
-            <div>here comes the chat</div>
+            <h3>navigation</h3>
         );
     }
 }
 
-export default Chat;
+export default NavBar;
