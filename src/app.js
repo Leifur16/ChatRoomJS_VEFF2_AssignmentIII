@@ -6,6 +6,7 @@ import NavBar from './Navigation/NavBar';
 import socketClient from 'socket.io-client';
 import '../styles/site';
 import ChatWindow from './components/ChatWindow/ChatWindow';
+import ChatList from './components/ChatList/ChatList';
 
 class App extends React.Component {
     componentDidCatch(error, info) {
@@ -22,10 +23,15 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <NavBar />
-                <User />
+                <NavBar className="NavBar"/>
                 <div className="container">
-                  <ChatWindow />
+                  <div className="ChatList-container">
+                    <ChatList />
+                  </div>
+                    <User />
+                  <div className="chat-container">
+                    <ChatWindow />
+                  </div>
                 </div>
             </div>
         );
