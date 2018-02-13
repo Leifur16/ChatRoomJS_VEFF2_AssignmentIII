@@ -5,8 +5,8 @@ import User from './Container/User/User';
 import NavBar from './Navigation/NavBar';
 import socketClient from 'socket.io-client';
 import '../styles/site';
-import ChatWindow from './components/ChatWindow/ChatWindow';
-import ChatList from './components/ChatList/ChatList';
+import ChatWindow from './Container/ChatWindow/ChatWindow';
+import ChatList from './Container/ChatList/ChatList';
 
 class App extends React.Component {
     componentDidCatch(error, info) {
