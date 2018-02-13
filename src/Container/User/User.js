@@ -1,52 +1,39 @@
 import React from 'react';
+import { PropTypes} from 'prop-types';
 
 class User extends React.Component {
+
     constructor(props) {
         super(props);
         this.state ={
             value : '',
             userNames: [],
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.validate = this.validate.bind(this);
-    }
-	
-    handleChange(e) {
-        this.setState({value: e.target.value});
     }
 
-    validate(e) {
-        var exists = false;
+    validateAndConfirm() {
+        const{ socket } = this.context;
+        socket.emit('adduser', this.state.value, (loggedIn) => {
+            console.log(loggedIn);
+        });
 
-        for(var i = 0; i < this.state.userNames.length; i++) {
-			
-            if(this.state.userNames[i] === this.state.value) {
-                exists = true;
-            }	
-        }
-
-        if(!exists) {
-            console.log(exists);
-            this.state.userNames.push(this.state.value);
-        }
-		
-        console.log(this.state.userNames.length);
-        e.preventDefault();
+        this.setState({value: ''});
     }
 
     render() {
+        const {value} = this.state;
         return (
-            <form onSubmit={this.validate}>
-                <label>
-                    Name:
-                    <input type="text" value = { this.state.value } onChange = { this.handleChange } />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
+            <div>
+                <input type="text" value = { value} onInput={(e) => this.setState({value: e.target.value})} />
+                <button type="button" onClick = {() => this.validateAndConfirm()} >Confirm</button>
+            </div>
         );
 
     }
 }
 
-export default User;
+User.contextTypes = {
+    socket: PropTypes.object.isRequired
+};
 
+export default User;
