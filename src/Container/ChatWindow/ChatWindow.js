@@ -16,7 +16,7 @@ class ChatWindow extends React.Component {
         socket.on('updatechat', (id, stuff2) => {
 
           let updatedMessages = Object.assign([], stuff2);
-
+          console.log(updatedMessages);
           this.setState({messages : updatedMessages});
 
         });
@@ -42,7 +42,7 @@ class ChatWindow extends React.Component {
         const { messages, msg } = this.state;
         return (
             <div className="chat-window">
-                {messages.map(m => ( <div >{m}</div> ))}
+                {messages.map(m => ( <div key={m}>{m}</div> ))}
                 <div className="input-box">
                     <input
                         type="text"
