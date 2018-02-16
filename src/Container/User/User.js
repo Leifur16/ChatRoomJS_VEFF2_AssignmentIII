@@ -15,6 +15,16 @@ class User extends React.Component {
         const{ socket } = this.context;
         socket.emit('adduser', this.state.value, (loggedIn) => {
             console.log(loggedIn);
+            if(loggedIn) {
+            socket.emit('joinroom', {room:'lobby'}, (joinedLobby, reason) => {
+              if(joinedLobby) {
+                console.log('successful');
+              }
+              else {
+                console.log(reason);
+              }
+            });
+            }
         });
 
         this.setState({value: ''});

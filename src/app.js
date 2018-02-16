@@ -30,11 +30,13 @@ class App extends React.Component {
                   </div>
                     <User />
                   <div className="chat-container">
-                    <ChatWindow />
+                    <div>
+                      <ChatWindow />
+                    </div>
                   </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
