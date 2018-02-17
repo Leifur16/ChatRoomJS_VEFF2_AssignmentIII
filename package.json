@@ -27,6 +27,7 @@
     "jest": "^22.2.2",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "mock-socket": "^7.1.0",
     "path": "^0.12.7",
     "style-loader": "^0.20.1",
     "webpack": "^3.10.0",

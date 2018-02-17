@@ -25,15 +25,15 @@ class App extends React.Component {
             <div>
                 <NavBar className="NavBar"/>
                 <div className="container">
-                  <div className="ChatList-container">
-                    <ChatList />
-                  </div>
-                    <User />
-                  <div className="chat-container">
-                    <div>
-                      <ChatWindow />
+                    <div className="ChatList-container">
+                        <ChatList />
                     </div>
-                  </div>
+                    <User />
+                    <div className="chat-container">
+                        <div>
+                            <ChatWindow />
+                        </div>
+                    </div>
                 </div>
             </div>
         )

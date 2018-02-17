@@ -19,8 +19,7 @@ class User extends React.Component {
                 socket.emit('joinroom', {room:'lobby'}, (joinedLobby, reason) => {
                     if(joinedLobby) {
                         console.log('successfully joined room');
-                    }
-                    else {
+                    } else {
                         console.log(reason);
                     }
                 });
