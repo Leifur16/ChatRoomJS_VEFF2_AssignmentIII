@@ -19,7 +19,7 @@ class User extends React.Component {
                 this.setState({confirm: true});
                 this.props.onUser(this.state.confirm);
                 this.props.giveUser(this.state.value);
-                socket.emit('joinroom', 'lobby', (joinedLobby, reason) => {
+                socket.emit('joinroom', 'lobby ', (joinedLobby, reason) => {
                     if(joinedLobby) {
                         console.log('successfully joined room');
                     }else {
