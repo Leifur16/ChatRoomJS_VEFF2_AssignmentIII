@@ -16,14 +16,14 @@ class User extends React.Component {
         socket.emit('adduser', this.state.value, (loggedIn) => {
             console.log(loggedIn);
             if(loggedIn) {
-            socket.emit('joinroom', {room:'lobby'}, (joinedLobby, reason) => {
-              if(joinedLobby) {
-                console.log('successful');
-              }
-              else {
-                console.log(reason);
-              }
-            });
+                socket.emit('joinroom', {room:'lobby'}, (joinedLobby, reason) => {
+                    if(joinedLobby) {
+                        console.log('successfully joined room');
+                    }
+                    else {
+                        console.log(reason);
+                    }
+                });
             }
         });
 
