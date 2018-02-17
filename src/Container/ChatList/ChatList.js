@@ -27,12 +27,16 @@ class ChatList extends React.Component {
     CreateChat() {
         const{ socket } = this.context;
         console.log('room: ' + this.state.room);
+        var roomAndNone = {
+            room: this.state.room,
+            pass: undefined
+        };
 
 
         socket.emit('adduser', this.props.user , (loggedIn) => {
             if(loggedIn) {
                 console.log('loggedin');
-                socket.emit('joinroom', {room: this.state.room}, (loggedIn, TREW) => {
+                socket.emit('joinroom', roomAndNone, (loggedIn, TREW) => {
                     if(loggedIn) {
                         console.log('Thu ert hora');
 
@@ -57,23 +61,23 @@ class ChatList extends React.Component {
             console.log('allRomms: ' + allRomms);
 
             this.setState({listRooms: allRomms});
-            console.log('listRooms: ' + this.state.listRooms);
+            console.log(this.state.listRooms);
         });
 
     }
 
     render() {
-        const {rooms = []} = this.state.listRooms;
-        const list = rooms.map((number) =>
-            <li>{number}</li>
-        );
+
 
         return (
             <div>
                 <input type = "number"  onInput = {(e) => this.setState({room: e.target.value})} />
                 <input type = "password"  onInput = {(e) => this.setState({pass: e.target.value})} />
                 <button type="button" onClick = {() => this.CreateChat()} >Confirm</button>
-                <ul>{list}</ul>
+                
+                {this.state.listRooms.map((result, i) => (
+                    <li key={i}>{result.topic}</li>
+                ))}
 
 
             </div>
