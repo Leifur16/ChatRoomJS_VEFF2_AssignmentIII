@@ -12,7 +12,6 @@ class App extends React.Component {
     componentDidCatch(error, info) {
         console.log(error, info);
     }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +21,6 @@ class App extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.getUserName = this.getUserName.bind(this);
     }
-
     getChildContext() {
         return {
             socket: socketClient('http://localhost:8080')
@@ -57,13 +55,12 @@ class App extends React.Component {
                 }
                 <User onUser= {this.handleChange} giveUser = {this.getUserName}/>
             </div>
-        );
+        )
     }
 }
 
 App.childContextTypes = {
-    socket: PropTypes.object.isRequired,
+    socket: PropTypes.object.isRequired
 };
-
 
 ReactDOM.render(<App />, document.getElementById('app'));

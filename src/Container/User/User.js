@@ -8,7 +8,6 @@ class User extends React.Component {
         this.state ={
             value : '',
             userNames: [],
-            confirm: false,
         };
     }
 
@@ -20,7 +19,7 @@ class User extends React.Component {
                 this.setState({confirm: true});
                 this.props.onUser(this.state.confirm);
                 this.props.giveUser(this.state.value);
-                socket.emit('joinroom', {room:0}, (joinedLobby, reason) => {
+                socket.emit('joinroom', 'lobby', (joinedLobby, reason) => {
                     if(joinedLobby) {
                         console.log('successfully joined room');
                     }else {
@@ -48,8 +47,7 @@ class User extends React.Component {
 }
 
 User.contextTypes = {
-    socket: PropTypes.object.isRequired,
+    socket: PropTypes.object.isRequired
 };
-
 
 export default User;
