@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes} from 'prop-types';
 
 class ChatList extends React.Component {
-    componentDidMount() {
+    /*componentDidMount() {
         const{ socket } = this.context;
         console.log('listRooms');
         socket.on('roomlist', (room) =>{
@@ -10,37 +10,72 @@ class ChatList extends React.Component {
             rooms.push(room);
             this.setState({rooms});
         })
-    }
+    }*/
     constructor(props) {
         super(props);
         this.state = {
-            room: '',
-            pass: '',
+            room: undefined,
             listRooms: [],
+            userName: '',
         };
+    }
+
+    getUsername(us) {
+        this.setState({userName: us});
     }
 
     CreateChat() {
         const{ socket } = this.context;
-        console.log('hahdh');
-        socket.emit('joinroom', {room: this.state.room, pass: this.state.pass }, (loggedIn) => {
-            console.log(loggedIn);
+        console.log('room: ' + this.state.room);
+
+
+        socket.emit('adduser', this.props.user , (loggedIn) => {
+            if(loggedIn) {
+                console.log('loggedin');
+                socket.emit('joinroom', {room: this.state.room}, (loggedIn, TREW) => {
+                    if(loggedIn) {
+                        console.log('Thu ert hora');
+
+                    }else {
+                        console.log(TREW);
+                    }
+                });
+            }
         });
+        this.componentDidMount();
+
+    }
+
+    componentDidMount() {
+        const{ socket } = this.context;
+        console.log('in displayList');
+        socket.emit('rooms',  {
+
+        });
+        socket.on('roomlist', rooms => {
+            let allRomms = Object.assign([], rooms);
+            console.log('allRomms: ' + allRomms);
+
+            this.setState({listRooms: allRomms});
+            console.log('listRooms: ' + this.state.listRooms);
+        });
+
     }
 
     render() {
-        const{ listRooms } = this.state.listRooms;
-        var rooms = this.state.listRooms.length ? listRooms.map(m => (<div> {m} </div>)) : '';
-
+        const {rooms = []} = this.state.listRooms;
+        const list = rooms.map((number) =>
+            <li>{number}</li>
+        );
 
         return (
             <div>
-                <input type = "text"  onInput = {(e) => this.setState({room: e.target.value})} />
-                <input type = "password" onInput = {(e) => this.setState({pass: e.target.value})} />
+                <input type = "number"  onInput = {(e) => this.setState({room: e.target.value})} />
+                <input type = "password"  onInput = {(e) => this.setState({pass: e.target.value})} />
                 <button type="button" onClick = {() => this.CreateChat()} >Confirm</button>
-                <div>
-                    {rooms}
-                </div>
+                <ul>{list}</ul>
+
+
             </div>
         );
     }

@@ -17,8 +17,10 @@ class App extends React.Component {
         super(props);
         this.state = {
             confirm : false,
+            userName: '',
         };
         this.handleChange = this.handleChange.bind(this);
+        this.getUserName = this.getUserName.bind(this);
     }
 
     getChildContext() {
@@ -28,9 +30,11 @@ class App extends React.Component {
     }
 
     handleChange(con)  {
-        console.log('in here!');
         this.setState({confirm: con});
-        console.log(this.state.confirm);
+    }
+
+    getUserName(user) {
+        this.setState({userName: user});
     }
 
     render() {
@@ -41,7 +45,7 @@ class App extends React.Component {
                         <NavBar className="NavBar"/>
                         <div className="container">
                             <div className="ChatList-container">
-                                <ChatList />
+                                <ChatList user = {this.state.userName} />
                             </div>
 
                             <button type = "button" onClick = {() => this.whatever()}>get</button>
@@ -51,7 +55,7 @@ class App extends React.Component {
                         </div>
                     </div>
                 }
-                <User onUser= {this.handleChange}/>
+                <User onUser= {this.handleChange} giveUser = {this.getUserName}/>
             </div>
         );
     }

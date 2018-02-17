@@ -15,10 +15,19 @@ class User extends React.Component {
     validateAndConfirm() {
         const{ socket } = this.context;
         socket.emit('adduser', this.state.value, (loggedIn) => {
-            console.log(loggedIn);
-            this.setState({confirm: true});
-            this.props.onUser(this.state.confirm);
-            console.log('confirm: ' + this.state.confirm);
+
+            if(loggedIn) {
+                this.setState({confirm: true});
+                this.props.onUser(this.state.confirm);
+                this.props.giveUser(this.state.value);
+                socket.emit('joinroom', {room:0}, (joinedLobby, reason) => {
+                    if(joinedLobby) {
+                        console.log('successfully joined room');
+                    }else {
+                        console.log(reason);
+                    }
+                });
+            }
         });
 
         this.setState({value: ''});
@@ -29,7 +38,8 @@ class User extends React.Component {
         return (
             <div>
                 <input type="text" value = { value} onInput={(e) => this.setState({value: e.target.value})} />
-                <button type="button" onClick = {() => this.validateAndConfirm()} >Confirm</button>
+                <button type="button" onClick = {() => this.validateAndConfirm()} >submit username</button>
+
 
             </div>
         );
@@ -39,7 +49,6 @@ class User extends React.Component {
 
 User.contextTypes = {
     socket: PropTypes.object.isRequired,
-    confirm: PropTypes.string
 };
 
 
