@@ -9,7 +9,7 @@ class ChatWindow extends React.Component {
             let messages = [];
             for(var i = 0; i < allMesseges.length; i++) {
                 messages.push(allMesseges[i].nick + ' - ' + allMesseges[i].timestamp + ' - ' + allMesseges[i].message);
-            }
+            };
             this.setState({ messages });
         });
     }
@@ -22,6 +22,7 @@ class ChatWindow extends React.Component {
         };
     }
     sendMessage() {
+        console.log('what is going on?');
         const { socket } = this.context;
         let messageObject = {
             msg: this.state.msg,

@@ -14,27 +14,46 @@ class App extends React.Component {
     }
     constructor(props) {
         super(props);
+        this.state = {
+            confirm : false,
+            userName: '',
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.getUserName = this.getUserName.bind(this);
     }
     getChildContext() {
         return {
             socket: socketClient('http://localhost:8080')
         };
     }
+
+    handleChange(con)  {
+        this.setState({confirm: con});
+    }
+
+    getUserName(user) {
+        this.setState({userName: user});
+    }
+
     render() {
         return (
             <div>
-                <NavBar className="NavBar"/>
-                <div className="container">
-                    <div className="ChatList-container">
-                        <ChatList />
-                    </div>
-                    <User />
-                    <div className="chat-container">
-                        <div>
-                            <ChatWindow />
+                { this.state.confirm &&
+                    <div>
+                        <NavBar className="NavBar"/>
+                        <div className="container">
+                            <div className="ChatList-container">
+                                <ChatList user = {this.state.userName} />
+                            </div>
+
+                            <button type = "button" onClick = {() => this.whatever()}>get</button>
+                            <div className="chat-container">
+                                <ChatWindow />
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+                <User onUser= {this.handleChange} giveUser = {this.getUserName}/>
             </div>
         )
     }
