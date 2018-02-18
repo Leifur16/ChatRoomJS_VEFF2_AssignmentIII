@@ -20,10 +20,12 @@ class App extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.getUserName = this.getUserName.bind(this);
+        const socket = socketClient('http://localhost:8080');
+        this._socket = socket;
     }
     getChildContext() {
         return {
-            socket: socketClient('http://localhost:8080')
+            socket: this._socket
         };
     }
 

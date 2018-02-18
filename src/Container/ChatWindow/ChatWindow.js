@@ -22,7 +22,8 @@ class ChatWindow extends React.Component {
         };
     }
     sendMessage() {
-        console.log('what is going on?');
+        console.log('chatwindow context');
+        console.log(this.context);
         const { socket } = this.context;
         let messageObject = {
             msg: this.state.msg,
