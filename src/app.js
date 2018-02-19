@@ -19,9 +19,11 @@ class App extends React.Component {
         this.state = {
             confirm : false,
             userName: '',
+            selectedRoom: 0,
         };
         this.handleChange = this.handleChange.bind(this);
         this.getUserName = this.getUserName.bind(this);
+        this.getSelectedRoom = this.getSelectedRoom.bind(this);
         const socket = socketClient('http://localhost:8080');
         this._socket = socket;
     }
@@ -33,7 +35,9 @@ class App extends React.Component {
 
     handleChange(con)  {
         this.setState({confirm: con});
-        alert(this.state.confirm);
+    }
+    getSelectedRoom(room) {
+        this.setState({selectedRoom: room});
     }
 
     getUserName(user) {
@@ -47,10 +51,10 @@ class App extends React.Component {
                     <NavBar className="NavBar"/>
                     <div className="container">
                         <div className="ChatList-container">
-                            <ChatList user = {this.state.userName} />
+                            <ChatList room = {this.getSelectedRoom} user = {this.state.userName} />
                         </div>
                         <div className="chat-container">
-                            <ChatWindow />
+                            <ChatWindow room = {this.state.selectedRoom} />
                         </div>
                         <div className="kick-ban-container">
                             <KickBan />
