@@ -7,6 +7,8 @@ import socketClient from 'socket.io-client';
 import '../styles/site';
 import ChatWindow from './Container/ChatWindow/ChatWindow';
 import ChatList from './Container/ChatList/ChatList';
+import KickBan from './Container/KickBan/KickBan';
+import PrivateMSG from './Container/PrivateMSG/PrivateMSG';
 
 class App extends React.Component {
     componentDidCatch(error, info) {
@@ -53,6 +55,12 @@ class App extends React.Component {
                         </div>
                         <div className="chat-container">
                             <ChatWindow room = {this.state.selectedRoom} />
+                        </div>
+                        <div className="kick-ban-container">
+                            <KickBan />
+                        </div>
+                        <div className="privatemsg-container">
+                            <PrivateMSG />
                         </div>
                     </div>
                 </div>
