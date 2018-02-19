@@ -14,7 +14,7 @@ class ChatList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            room: undefined,
+            topic: '',
             listRooms: [],
             userName: '',
         };
@@ -26,7 +26,7 @@ class ChatList extends React.Component {
 
     CreateChat() {
         const{ socket } = this.context;
-        
+
         var roomAndNone = {
             room: this.state.room,
             pass: undefined
@@ -38,6 +38,14 @@ class ChatList extends React.Component {
 
             }else {
                 console.log(TREW);
+            }
+        });
+        console.log('topic: ' + this.state.topic);
+        socket.emit('settopic', {room: this.state.room, topic: this.state.topic}, (created, log) => {
+            if(created) {
+                console.log('topic created');
+            }else {
+                console.log(log);
             }
         });
 
@@ -67,7 +75,7 @@ class ChatList extends React.Component {
         return (
             <div>
                 <input type = "number"  onInput = {(e) => this.setState({room: e.target.value})} />
-                <input type = "password"  onInput = {(e) => this.setState({pass: e.target.value})} />
+                <input type = "text"  onInput = {(e) => this.setState({topic: e.target.value})} />
                 <button type="button" onClick = {() => this.CreateChat()} >Confirm</button>
 
                 {this.state.listRooms.map((result, i) => (
