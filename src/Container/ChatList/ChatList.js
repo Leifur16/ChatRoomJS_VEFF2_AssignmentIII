@@ -72,10 +72,9 @@ class ChatList extends React.Component {
         const{ socket } = this.context;
         console.log(i);
         console.log(event);
-        socket.emit('partroom', i, (log, log2) =>{
-            console.log(log);
-            console.log(log2);
-        });
+        socket.emit('partroom', i);
+
+        socket.on('servermessage', 'part', console.log(fn), console.log(fn2));
     }
 
     handleClick(i, event) {
