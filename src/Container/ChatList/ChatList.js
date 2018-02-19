@@ -72,7 +72,10 @@ class ChatList extends React.Component {
         const{ socket } = this.context;
         console.log(i);
         console.log(event);
-        socket.emit('partroom', i);
+        socket.emit('partroom', i, (log, log2) =>{
+            console.log(log);
+            console.log(log2);
+        });
     }
 
     handleClick(i, event) {
@@ -109,10 +112,10 @@ class ChatList extends React.Component {
                 <button type="button" onClick = {() => this.CreateChat()} >Confirm</button>
 
                 {this.state.listRooms.map((result, i) => (
-                    <div>
-                        <li key={i} onClick={this.handleClick.bind(this, i)}>{result.topic}</li>
-                        <button key = {i} onClick = {this.leaveRoom.bind(this, i)}>x</button>
-                    </div>
+                    <li key={i} onClick={this.handleClick.bind(this, i)}>{result.topic}</li>
+                ))}
+                {this.state.listRooms.map((result, i) => (
+                    <button key = {i+1} onClick = {this.leaveRoom.bind(this, i)}>x</button>
                 ))}
 
 
