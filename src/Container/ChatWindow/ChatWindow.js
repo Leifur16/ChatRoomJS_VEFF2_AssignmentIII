@@ -5,6 +5,7 @@ class ChatWindow extends React.Component {
     componentDidMount() {
 
         const { socket } = this.context;
+
         socket.on('updatechat', (id, allMesseges) => {
             let messages = [];
             for(var i = 0; i < allMesseges.length; i++) {
@@ -22,12 +23,10 @@ class ChatWindow extends React.Component {
         };
     }
     sendMessage() {
-        console.log('chatwindow context');
-        console.log(this.context);
         const { socket } = this.context;
         let messageObject = {
             msg: this.state.msg,
-            roomName: this.state.roomName
+            roomName: this.props.room
         }
         socket.emit('sendmsg', messageObject);
         this.setState({ msg: '' });

@@ -17,6 +17,8 @@ class ChatList extends React.Component {
             topic: '',
             listRooms: [],
             userName: '',
+            selectedRoom :  0,
+            room: 0,
         };
     }
 
@@ -47,7 +49,7 @@ class ChatList extends React.Component {
                 console.log(theLog);
             }
         });
-
+        console.log(this.state.selectedRoom);
         this.componentDidMount();
 
     }
@@ -59,11 +61,36 @@ class ChatList extends React.Component {
 
         });
         socket.on('roomlist', rooms => {
+
             let allRomms = Object.assign([], rooms);
 
             this.setState({listRooms: allRomms});
         });
 
+    }
+    leaveRoom(i, event) {
+        const{ socket } = this.context;
+        console.log(i);
+        console.log(event);
+        socket.emit('partroom', i);
+    }
+
+    handleClick(i, event) {
+        const{ socket } = this.context;
+
+        socket.emit('joinroom', {room: i, pass: undefined}, (loggedIn, theLog) => {
+            if(loggedIn) {
+                console.log('Room successfully joined');
+
+            }else {
+                console.log(theLog);
+            }
+        });
+
+        console.log(i);
+        this.setState({selectedRoom: i});
+        this.props.room(i);
+        console.log('event: ' + event);
     }
 
     render() {
@@ -82,8 +109,13 @@ class ChatList extends React.Component {
                 <button type="button" onClick = {() => this.CreateChat()} >Confirm</button>
 
                 {this.state.listRooms.map((result, i) => (
-                    <li key={i}>{result.topic}</li>
+                    <div>
+                        <li key={i} onClick={this.handleClick.bind(this, i)}>{result.topic}</li>
+                        <button key = {i} onClick = {this.leaveRoom.bind(this, i)}>x</button>
+                    </div>
                 ))}
+
+
 
 
             </div>
