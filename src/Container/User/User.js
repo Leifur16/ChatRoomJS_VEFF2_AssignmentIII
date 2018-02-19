@@ -38,7 +38,7 @@ class User extends React.Component {
             }
         });
 
-        this.setState({value: ''});
+        //this.setState({value: ''});
     }
 
 
