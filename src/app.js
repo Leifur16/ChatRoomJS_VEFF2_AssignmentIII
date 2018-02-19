@@ -31,6 +31,7 @@ class App extends React.Component {
 
     handleChange(con)  {
         this.setState({confirm: con});
+        alert(this.state.confirm);
     }
 
     getUserName(user) {
@@ -38,26 +39,23 @@ class App extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                { this.state.confirm &&
-                    <div>
-                        <NavBar className="NavBar"/>
-                        <div className="container">
-                            <div className="ChatList-container">
-                                <ChatList user = {this.state.userName} />
-                            </div>
-
-                            <button type = "button" onClick = {() => this.whatever()}>get</button>
-                            <div className="chat-container">
-                                <ChatWindow />
-                            </div>
+        if(this.state.confirm) {
+            return(
+                <div>
+                    <NavBar className="NavBar"/>
+                    <div className="container">
+                        <div className="ChatList-container">
+                            <ChatList user = {this.state.userName} />
+                        </div>
+                        <div className="chat-container">
+                            <ChatWindow />
                         </div>
                     </div>
-                }
-                <User onUser= {this.handleChange} giveUser = {this.getUserName}/>
-            </div>
-        )
+                </div>
+            )
+        }else {
+            return <div><User onUser= {this.handleChange} giveUser = {this.getUserName}/></div>
+        }
     }
 }
 

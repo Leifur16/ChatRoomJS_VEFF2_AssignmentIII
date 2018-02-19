@@ -32,20 +32,19 @@ class ChatList extends React.Component {
             pass: undefined
         };
 
-        socket.emit('joinroom', roomAndNone, (loggedIn, TREW) => {
+        socket.emit('joinroom', roomAndNone, (loggedIn, theLog) => {
             if(loggedIn) {
-                console.log('Thu ert hora');
+                console.log('Room successfully created');
 
             }else {
-                console.log(TREW);
+                console.log(theLog);
             }
         });
-        console.log('topic: ' + this.state.topic);
-        socket.emit('settopic', {room: this.state.room, topic: this.state.topic}, (created, log) => {
+        socket.emit('settopic', {room: this.state.room, topic: this.state.topic}, (created, theLog) => {
             if(created) {
                 console.log('topic created');
             }else {
-                console.log(log);
+                console.log(theLog);
             }
         });
 
@@ -61,10 +60,8 @@ class ChatList extends React.Component {
         });
         socket.on('roomlist', rooms => {
             let allRomms = Object.assign([], rooms);
-            console.log('allRomms: ' + allRomms);
 
             this.setState({listRooms: allRomms});
-            console.log(this.state.listRooms);
         });
 
     }
@@ -74,8 +71,14 @@ class ChatList extends React.Component {
 
         return (
             <div>
-                <input type = "number"  onInput = {(e) => this.setState({room: e.target.value})} />
-                <input type = "text"  onInput = {(e) => this.setState({topic: e.target.value})} />
+                <div className = "form-group">
+                    <label htmlFor = "room">Room </label>
+                    <input type = "number" id = "room"  onInput = {(e) => this.setState({room: e.target.value})} />
+                </div>
+                <div className = "form-group">
+                    <label htmlFor = "topic">Topic </label>
+                    <input type = "text"  id = "topic" onInput = {(e) => this.setState({topic: e.target.value})} />
+                </div>
                 <button type="button" onClick = {() => this.CreateChat()} >Confirm</button>
 
                 {this.state.listRooms.map((result, i) => (

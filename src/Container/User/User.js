@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+
 class User extends React.Component {
 
     constructor(props) {
@@ -8,6 +9,7 @@ class User extends React.Component {
         this.state ={
             value : '',
             userNames: [],
+            confirm: false,
         };
     }
 
@@ -30,6 +32,9 @@ class User extends React.Component {
                         console.log(reason);
                     }
                 });
+            }else{
+                this.setState({confirm: false});
+                this.props.onUser(this.state.confirm);
             }
         });
 
@@ -40,9 +45,13 @@ class User extends React.Component {
     render() {
         const {value} = this.state;
         return (
-            <div>
-                <input type="text" value = { value} onInput={(e) => this.setState({value: e.target.value})} />
-                <button type="button" onClick = {() => this.validateAndConfirm()} >submit username</button>
+
+            <div className = "wrapper">
+                <div className="form-signin">
+                    <h2 className="form-signin-heading">Please login</h2>
+                    <input type="text" className = "form-control" name = "username" placeholder = "Username" value = { value} onInput={(e) => this.setState({value: e.target.value})} />
+                    <button className ="btn" type="submit" onClick = {() => this.validateAndConfirm()}>Login</button>
+                </div>
             </div>
         );
     }
