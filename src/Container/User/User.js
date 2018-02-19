@@ -9,6 +9,7 @@ class User extends React.Component {
         this.state ={
             value : '',
             userNames: [],
+            confirm: false,
         };
     }
 
@@ -31,6 +32,9 @@ class User extends React.Component {
                         console.log(reason);
                     }
                 });
+            }else{
+                this.setState({confirm: false});
+                this.props.onUser(this.state.confirm);
             }
         });
 
