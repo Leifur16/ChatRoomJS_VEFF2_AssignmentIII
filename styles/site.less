@@ -2,12 +2,12 @@
 
 body {
     .NavBar {
-
+        margin-bottom: 40px;
     }
 
     .container {
 
-        width: 1040px;
+        width: 1090px;
         margin: 0 auto;
 
         .privatemsg-container {
@@ -15,7 +15,9 @@ body {
             height: 510px;
             margin: 0 auto;
             float: left;
-
+            border-style: solid;
+            border-width: 1px;
+            border-color: gray;
             .private-chat-window {
                 position: relative;
                 height: 440px;
@@ -52,9 +54,13 @@ body {
 
           .chat-window {
               position: relative;
+              background-color: rgba(219, 217, 217, .6);
               height: 510px;
               width: 440px;
-              border: 2px solid #73AD21;
+              border-style: solid;
+              border-width: 1px;
+              border-color: gray;
+
 
 
               .input-box {
@@ -75,6 +81,10 @@ body {
                       background-color: rgba(50, 200, 50, .6);
                       color: white;
                   }
+                  .btnKick{
+                      display: inline;
+                      width: 30px;
+                  }
               }
             }
         }
@@ -84,13 +94,18 @@ body {
             float: left;
             height: 510px;
             display: inline;
+            border-style: solid;
+            border-width: 1px;
+            border-color: gray;
         }
         .kick-ban-container {
-            background: green;
             width: 200px;
             height: 510px;
             margin: 0 auto;
             float: left;
+            border-style: solid;
+            border-width: 1px;
+            border-color: gray;
         }
     }
     .pull-right {
