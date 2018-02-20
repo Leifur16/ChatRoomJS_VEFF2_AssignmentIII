@@ -122,20 +122,16 @@ class ChatList extends React.Component {
 
                 {listRooms.map((result, i) => (
                     <div key={i}>
-                        <li key={i} onClick={this.handleClick.bind(this, result)}>{result}
-                            <FaBeer  onClick = {this.leaveRoom.bind(this, result)}/></li>
+                        <li className="inlineChildren">
+                            <ol className="clickMe" key={i} onClick={this.handleClick.bind(this, result)}> -{result}</ol>
+                            <FaBeer  className="clickMe" onClick = {this.leaveRoom.bind(this, result)}/>
+                        </li>
                     </div>
                 ))}
 
             </div>
         );
     }
-    /*{listRooms.map((result, i) => (
-        <div key={i}>
-            <li key={i} onClick={this.handleClick.bind(this, i)}>{result}
-                <FaBeer  onClick = {this.leaveRoom.bind(this, i)}/></li>
-        </div>
-    ))}*/
 }
 
 ChatList.contextTypes = {
