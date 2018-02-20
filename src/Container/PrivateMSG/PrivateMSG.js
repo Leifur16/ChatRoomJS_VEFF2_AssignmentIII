@@ -7,7 +7,7 @@ class PrivateMSG extends React.Component {
 
         const { socket } = this.context;
         socket.on('recv_privatemsg', (userName, msg) => {
-            console.log(userName, ' ', msg);
+            console.log('recieved private msg from user: ', userName, ', message: ', msg);
             let allMesseges = this.state.messages;
             allMesseges.push(userName + ' - ' + msg);
             this.setState({ messages:allMesseges });
