@@ -3,23 +3,31 @@ import { PropTypes} from 'prop-types';
 import FaBeer from 'react-icons/lib/fa/close';
 
 class ChatList extends React.Component {
-    /*componentDidMount() {
+
+    componentDidMount() {
         const{ socket } = this.context;
-        console.log('listRooms');
-        socket.on('roomlist', (room) =>{
-            let rooms = Object.assign([], this.state.listRooms);
-            rooms.push(room);
-            this.setState({rooms});
-        })
-    }*/
+        console.log('in displayList');
+        socket.emit('rooms',  {
+
+        });
+        socket.on('roomlist', rooms => {
+
+            let allRomms = Object.keys(rooms);
+            console.log('allRomms');
+
+            this.setState({listRooms: allRomms});
+        });
+    }
+
     constructor(props) {
         super(props);
         this.state = {
             topic: '',
             listRooms: [],
             userName: '',
-            selectedRoom :  0,
-            room: 0,
+            selectedRoom :  '',
+            room: '',
+            isOped: false,
         };
     }
 
@@ -38,6 +46,9 @@ class ChatList extends React.Component {
         socket.emit('joinroom', roomAndNone, (loggedIn, theLog) => {
             if(loggedIn) {
                 console.log('Room successfully created');
+                socket.emit('rooms',  {
+
+                });
 
             }else {
                 console.log(theLog);
@@ -51,27 +62,39 @@ class ChatList extends React.Component {
             }
         });
         console.log(this.state.selectedRoom);
-        this.componentDidMount();
-
     }
 
-    componentDidMount() {
+
+    leaveRoom(i, event) {
         const{ socket } = this.context;
-        socket.emit('rooms',  {
-
+        console.log(i);
+        console.log(event);
+        socket.emit('partroom', i, (log, log2) =>{
+            console.log(log);
+            console.log(log2);
         });
-        socket.on('roomlist', rooms => {
+    }
 
-            let allRomms = Object.assign([], rooms);
+    handleClick(i, event) {
+        const{ socket } = this.context;
+        console.log(i, event);
+        socket.emit('joinroom', {room: i, pass: undefined}, (loggedIn, theLog) => {
+            if(loggedIn) {
+                console.log('Room successfully joined');
 
-            this.setState({listRooms: allRomms});
+            }else {
+                console.log(theLog);
+            }
         });
+
+        console.log(i);
+        this.setState({selectedRoom: i});
+        this.props.room(i);
+        console.log('event: ' + event);
 
     }
 
     leaveRoom(i) {
-        console.log(i);
-
         const{ socket } = this.context;
         socket.on('servermessage', (a ,b ,c)=> {
             console.log('User ', c , ' is leaving room: ', b);
@@ -81,43 +104,33 @@ class ChatList extends React.Component {
         socket.emit('partroom', i);
     }
 
-    handleClick(i) {
-        const{ socket } = this.context;
-
-
-        socket.emit('joinroom', {room: i, pass: undefined}, (loggedIn, theLog) => {
-            if(loggedIn) {
-                console.log('Room successfully joined');
-
-            }else {
-                console.log(theLog);
-            }
-        });
-        this.setState({selectedRoom: i});
-        this.props.room(i);
-    }
-
     render() {
 
-
+        const { listRooms, room, topic } = this.state;
         return (
-            <div className = "chatListMar">
+            <div>
                 <div className = "form-group">
                     <label htmlFor = "room">Room </label>
-                    <input type = "number" id = "room"  onInput = {(e) => this.setState({room: e.target.value})} />
+                    <input
+                        type = "text"
+                        value = {room}
+                        id = "room"
+                        onInput = {(e) => this.setState({room: e.target.value})} />
                 </div>
                 <div className = "form-group">
                     <label htmlFor = "topic">Topic </label>
-                    <input type = "text"  id = "topic" onInput = {(e) => this.setState({topic: e.target.value})} />
+                    <input
+                        type = "text"
+                        value = {topic}
+                        id = "topic"
+                        onInput = {(e) => this.setState({topic: e.target.value})} />
                 </div>
                 <button type="button" onClick = {() => this.CreateChat()} >Confirm</button>
 
-                {this.state.listRooms.map((result, i) => (
+                {listRooms.map((result, i) => (
                     <div key={i}>
-                        <li
-                            onClick={this.handleClick.bind(this, i)}>{result.topic}
+                        <li key={i} onClick={this.handleClick.bind(this, i)}>{result}
                             <FaBeer  onClick = {this.leaveRoom.bind(this, i)}/></li>
-
                     </div>
                 ))}
 

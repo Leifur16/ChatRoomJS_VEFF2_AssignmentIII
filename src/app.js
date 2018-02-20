@@ -21,6 +21,7 @@ class App extends React.Component {
             confirm : false,
             userName: '',
             selectedRoom: 0,
+            isOped: false,
         };
         this.handleChange = this.handleChange.bind(this);
         this.getUserName = this.getUserName.bind(this);
@@ -45,6 +46,10 @@ class App extends React.Component {
         this.setState({userName: user});
     }
 
+    isOped(runIt) {
+        this.setState({isOped : runIt});
+    }
+
     render() {
         if(this.state.confirm) {
             return(
@@ -55,10 +60,10 @@ class App extends React.Component {
                             <ChatList room = {this.getSelectedRoom} user = {this.state.userName} />
                         </div>
                         <div className="chat-container">
-                            <ChatWindow room = {this.state.selectedRoom} />
+                            <ChatWindow room = {this.state.selectedRoom} isOped = {this.state.isOped}/>
                         </div>
                         <div className="kick-ban-container">
-                            <KickBan />
+                            <KickBan room = {this.state.selectedRoom} user = {this.state.userName}/>
                         </div>
                         <div className="privatemsg-container">
                             <PrivateMSG />
