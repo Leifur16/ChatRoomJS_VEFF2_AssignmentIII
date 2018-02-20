@@ -6,7 +6,7 @@ class KickBan extends React.Component {
     render() {
         return(
             <div>
-                kick or ban
+                <h3>kick or ban</h3>
             </div>
         )
     }
