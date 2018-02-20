@@ -129,8 +129,8 @@ class ChatList extends React.Component {
 
                 {listRooms.map((result, i) => (
                     <div key={i}>
-                        <li key={i} onClick={this.handleClick.bind(this, i)}>{result}
-                            <FaBeer  onClick = {this.leaveRoom.bind(this, i)}/></li>
+                        <li key={i} onClick={this.handleClick.bind(this, i)}>{result}</li>
+                            <FaBeer  onClick = {this.leaveRoom.bind(this, i)}/>
                     </div>
                 ))}
 
