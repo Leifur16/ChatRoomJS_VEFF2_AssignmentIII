@@ -20,7 +20,7 @@ class App extends React.Component {
         this.state = {
             confirm : false,
             userName: '',
-            selectedRoom: 0,
+            selectedRoom: '',
             isOped: false,
         };
         this.handleChange = this.handleChange.bind(this);

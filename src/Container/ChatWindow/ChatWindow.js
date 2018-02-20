@@ -19,7 +19,7 @@ class ChatWindow extends React.Component {
         this.state = {
             msg: '',
             messages: [],
-            roomName: 'lobby'
+            roomName: this.props.room
         };
     }
     sendMessage() {
@@ -32,10 +32,12 @@ class ChatWindow extends React.Component {
         this.setState({ msg: '' });
     }
     render() {
-        const { messages, msg, roomName } = this.state;
+        const { messages, msg } = this.state;
+
         return (
             <div className="chat-window">
-                <h3>{roomName}</h3>
+
+                <h3>{this.props.room}</h3>
                 {messages.map(m => ( <div key={m}>{m}</div> ))}
                 <div className="input-box">
                     <input
