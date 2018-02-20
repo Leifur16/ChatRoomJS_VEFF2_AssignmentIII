@@ -123,7 +123,7 @@ class ChatList extends React.Component {
                 {listRooms.map((result, i) => (
                     <div key={i}>
                         <li className="inlineChildren">
-                            <ol className="clickMe" key={i} onClick={this.handleClick.bind(this, result)}> -{result}</ol>
+                            <span className="clickMe" key={i} onClick={this.handleClick.bind(this, result)}> -{result}</span>
                             <FaBeer  className="clickMe" onClick = {this.leaveRoom.bind(this, result)}/>
                         </li>
                     </div>
