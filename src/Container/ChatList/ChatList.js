@@ -3,15 +3,7 @@ import { PropTypes} from 'prop-types';
 import FaBeer from 'react-icons/lib/fa/close';
 
 class ChatList extends React.Component {
-    /*componentDidMount() {
-        const{ socket } = this.context;
-        console.log('listRooms');
-        socket.on('roomlist', (room) =>{
-            let rooms = Object.assign([], this.state.listRooms);
-            rooms.push(room);
-            this.setState({rooms});
-        })
-    }*/
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -50,7 +42,6 @@ class ChatList extends React.Component {
                 console.log(theLog);
             }
         });
-        console.log(this.state.selectedRoom);
         this.componentDidMount();
 
     }
