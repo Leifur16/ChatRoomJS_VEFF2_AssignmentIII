@@ -73,31 +73,28 @@ class ChatList extends React.Component {
         });
     }
 
-    handleClick(i) {
+    handleClick(roomKey) {
         const{ socket } = this.context;
 
-        socket.emit('joinroom', {room: i, pass: undefined}, (loggedIn, theLog) => {
+        socket.emit('joinroom', {room: roomKey, pass: undefined}, (loggedIn, theLog) => {
             if(loggedIn) {
                 console.log('Room successfully joined');
-
+                this.setState({selectedRoom: roomKey});
+                this.props.room(roomKey);
             }else {
                 console.log(theLog);
             }
         });
-
-        this.setState({selectedRoom: i});
-        this.props.room(i);
-
     }
 
-    leaveRoom(i) {
+    leaveRoom(roomKey) {
         const{ socket } = this.context;
         socket.on('servermessage', (a ,b ,c)=> {
             console.log('User ', c , ' is leaving room: ', b);
 
         });
 
-        socket.emit('partroom', i);
+        socket.emit('partroom', roomKey);
     }
 
     render() {
@@ -125,14 +122,20 @@ class ChatList extends React.Component {
 
                 {listRooms.map((result, i) => (
                     <div key={i}>
-                        <li key={i} onClick={this.handleClick.bind(this, i)}>{result}
-                            <FaBeer  onClick = {this.leaveRoom.bind(this, i)}/></li>
+                        <li key={i} onClick={this.handleClick.bind(this, result)}>{result}
+                            <FaBeer  onClick = {this.leaveRoom.bind(this, result)}/></li>
                     </div>
                 ))}
 
             </div>
         );
     }
+    /*{listRooms.map((result, i) => (
+        <div key={i}>
+            <li key={i} onClick={this.handleClick.bind(this, i)}>{result}
+                <FaBeer  onClick = {this.leaveRoom.bind(this, i)}/></li>
+        </div>
+    ))}*/
 }
 
 ChatList.contextTypes = {
