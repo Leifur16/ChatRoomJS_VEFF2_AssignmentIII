@@ -32,9 +32,10 @@ class ChatWindow extends React.Component {
         this.setState({ msg: '' });
     }
     render() {
-        const { messages, msg } = this.state;
+        const { messages, msg, roomName } = this.state;
         return (
             <div className="chat-window">
+                <h3>{roomName}</h3>
                 {messages.map(m => ( <div key={m}>{m}</div> ))}
                 <div className="input-box">
                     <input

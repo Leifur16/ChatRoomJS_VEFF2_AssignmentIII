@@ -8,8 +8,6 @@ class KickBan extends React.Component {
         this.state = {
             userName: ''
         }
-        console.log('room!: ', this.props.room);
-        //this.isOped();
     }
 
 
