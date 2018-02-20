@@ -61,12 +61,6 @@ class ChatList extends React.Component {
             }
         });
         console.log(this.state.selectedRoom);
-
-        /*socket.emit('rooms',  {
-
-        });*/
-
-
     }
 
 
