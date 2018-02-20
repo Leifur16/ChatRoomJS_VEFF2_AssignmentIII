@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes} from 'prop-types';
+import FaBeer from 'react-icons/lib/fa/close';
 
 class ChatList extends React.Component {
     /*componentDidMount() {
@@ -56,7 +57,6 @@ class ChatList extends React.Component {
 
     componentDidMount() {
         const{ socket } = this.context;
-        console.log('in displayList');
         socket.emit('rooms',  {
 
         });
@@ -68,17 +68,22 @@ class ChatList extends React.Component {
         });
 
     }
-    leaveRoom(i, event) {
-        const{ socket } = this.context;
-        console.log(i);
-        console.log(event);
-        socket.emit('partroom', i);
 
-        socket.on('servermessage', 'part', console.log(fn), console.log(fn2));
+    leaveRoom(i) {
+        console.log(i);
+
+        const{ socket } = this.context;
+        socket.on('servermessage', (a ,b ,c)=> {
+            console.log('User ', c , ' is leaving room: ', b);
+
+        });
+
+        socket.emit('partroom', i);
     }
 
-    handleClick(i, event) {
+    handleClick(i) {
         const{ socket } = this.context;
+
 
         socket.emit('joinroom', {room: i, pass: undefined}, (loggedIn, theLog) => {
             if(loggedIn) {
@@ -88,18 +93,15 @@ class ChatList extends React.Component {
                 console.log(theLog);
             }
         });
-
-        console.log(i);
         this.setState({selectedRoom: i});
         this.props.room(i);
-        console.log('event: ' + event);
     }
 
     render() {
 
 
         return (
-            <div>
+            <div className = "chatListMar">
                 <div className = "form-group">
                     <label htmlFor = "room">Room </label>
                     <input type = "number" id = "room"  onInput = {(e) => this.setState({room: e.target.value})} />
@@ -111,14 +113,13 @@ class ChatList extends React.Component {
                 <button type="button" onClick = {() => this.CreateChat()} >Confirm</button>
 
                 {this.state.listRooms.map((result, i) => (
-                    <li key={i} onClick={this.handleClick.bind(this, i)}>{result.topic}</li>
+                    <div key={i}>
+                        <li
+                            onClick={this.handleClick.bind(this, i)}>{result.topic}
+                            <FaBeer  onClick = {this.leaveRoom.bind(this, i)}/></li>
+
+                    </div>
                 ))}
-                {this.state.listRooms.map((result, i) => (
-                    <button key = {i+1} onClick = {this.leaveRoom.bind(this, i)}>x</button>
-                ))}
-
-
-
 
             </div>
         );

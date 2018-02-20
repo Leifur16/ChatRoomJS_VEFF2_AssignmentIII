@@ -38,6 +38,7 @@
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-icons": "^2.2.7",
     "set-default-browser": "^1.0.1",
     "socket.io-client": "^2.0.4"
   }

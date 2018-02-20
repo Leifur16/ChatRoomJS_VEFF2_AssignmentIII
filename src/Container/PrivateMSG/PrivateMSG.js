@@ -43,20 +43,22 @@ class PrivateMSG extends React.Component {
             <div className="private-chat-window">
                 {messages.map(m => ( <div key={m}>{m}</div> ))}
                 <div className="private-input-box">
-                    user
+                    <label htmlFor = "user" >User </label>
+                    <br/>
                     <input
                         type="text"
+                        id = "user"
                         value={user}
                         className="private-input"
                         onInput={(f) => this.setState({ user: f.target.value })}/>
-                    <br />
-                    message
+                    <label htmlFor = "msg" >Message </label>
                     <input
                         type="text"
+                        id = "msg"
                         value={msg}
                         className="private-input"
                         onInput={(e) => this.setState({ msg: e.target.value })} />
-                    <br />
+
                     <button type="button" className="private-button" onClick={() => this.sendMessage()}>Send</button>
                 </div>
             </div>
