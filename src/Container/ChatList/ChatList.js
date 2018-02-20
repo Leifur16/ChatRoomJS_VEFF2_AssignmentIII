@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes} from 'prop-types';
+import FaBeer from 'react-icons/lib/fa/close';
 
 class ChatList extends React.Component {
 
@@ -93,6 +94,16 @@ class ChatList extends React.Component {
 
     }
 
+    leaveRoom(i) {
+        const{ socket } = this.context;
+        socket.on('servermessage', (a ,b ,c)=> {
+            console.log('User ', c , ' is leaving room: ', b);
+
+        });
+
+        socket.emit('partroom', i);
+    }
+
     render() {
 
         const { listRooms, room, topic } = this.state;
@@ -117,11 +128,12 @@ class ChatList extends React.Component {
                 <button type="button" onClick = {() => this.CreateChat()} >Confirm</button>
 
                 {listRooms.map((result, i) => (
-                    <li key={i} onClick={this.handleClick.bind(this, i)}>{result}</li>
+                    <div key={i}>
+                        <li key={i} onClick={this.handleClick.bind(this, i)}>{result}
+                            <FaBeer  onClick = {this.leaveRoom.bind(this, i)}/></li>
+                    </div>
                 ))}
-                {this.state.listRooms.map((result, i) => (
-                    <button key = {i+1} onClick = {this.leaveRoom.bind(this, i)}>x</button>
-                ))}
+
             </div>
         );
     }

@@ -14,9 +14,7 @@ class User extends React.Component {
     }
 
     validateAndConfirm() {
-        //const{ socket } = this.context;
-        console.log('username context');
-        console.log(this.context);
+        
         const { socket } = this.context;
         socket.emit('adduser', this.state.value, (loggedIn) => {
 

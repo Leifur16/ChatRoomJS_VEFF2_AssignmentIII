@@ -10,6 +10,7 @@ import ChatList from './Container/ChatList/ChatList';
 import KickBan from './Container/KickBan/KickBan';
 import PrivateMSG from './Container/PrivateMSG/PrivateMSG';
 
+
 class App extends React.Component {
     componentDidCatch(error, info) {
         console.log(error, info);
